@@ -1,48 +1,35 @@
 import {StyleSheet} from 'react-native';
 
-interface FontWeightTypes {
-  [key: string]:
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900';
+export enum FontWeights {
+  thin = '100',
+  ultraLight = '200',
+  light = '300',
+  regular = '400',
+  medium = '500',
+  semibold = '600',
+  bold = '700',
+  heavy = '800',
+  black = '900',
 }
-
-export const FontWeights: FontWeightTypes = {
-  thin: '100',
-  ultraLight: '200',
-  light: '300',
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  heavy: '800',
-  black: '900',
-};
 
 export const TypographyStyles = StyleSheet.create({
   // Logo and stuffs
   header: {
     fontSize: 34,
-    fontWeight: FontWeights.regular,
+    fontWeight: FontWeights.black,
   },
   // Title variants
   title1: {
     fontSize: 28,
-    fontWeight: FontWeights.regular,
+    fontWeight: FontWeights.bold,
   },
   title2: {
     fontSize: 22,
-    fontWeight: FontWeights.regular,
+    fontWeight: FontWeights.semibold,
   },
   title3: {
     fontSize: 20,
-    fontWeight: FontWeights.regular,
+    fontWeight: FontWeights.semibold,
   },
 
   // Tab view

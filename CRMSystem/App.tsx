@@ -1,10 +1,15 @@
 import {PaperProvider} from 'react-native-paper';
-import Home from './src/ui/screens/Home';
+import {NavigationContainer} from '@react-navigation/native';
+import MainStack from './src/ui/navigations/MainStack';
 
 function App(): React.JSX.Element {
   return (
+    // We are using paper ui to create basic components
     <PaperProvider>
-      <Home></Home>
+      <NavigationContainer>
+        {/* Main stack navigation */}
+        <MainStack />
+      </NavigationContainer>
     </PaperProvider>
   );
 }
