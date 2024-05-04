@@ -15,3 +15,9 @@ npm install @react-navigation/native-stack
 # To show svgs
 -> https://www.npmjs.com/package/react-native-svg
 npm install react-native-svg
+
+# To manage state
+-> https://redux-toolkit.js.org/introduction/getting-started
+npm install @reduxjs/toolkit
+npm install react-redux
+-> typescript: https://react-redux.js.org/tutorials/typescript-quick-start
