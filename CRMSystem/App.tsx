@@ -1,7 +1,12 @@
-import {View} from 'react-native';
+import {PaperProvider} from 'react-native-paper';
+import Home from './src/ui/screens/Home';
 
 function App(): React.JSX.Element {
-  return <View></View>;
+  return (
+    <PaperProvider>
+      <Home></Home>
+    </PaperProvider>
+  );
 }
 
 export default App;
