@@ -1,3 +1,4 @@
+import {StyleProp, TextStyle} from 'react-native';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -8,8 +9,6 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {IconTypes} from '../../../constants/strings';
-import {StyleProp} from 'react-native';
-import {TextStyle} from 'react-native';
 
 type Props = {
   name: string;

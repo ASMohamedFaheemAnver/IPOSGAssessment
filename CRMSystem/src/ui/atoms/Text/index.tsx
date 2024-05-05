@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import {StyleProp, TextStyle} from 'react-native';
-import {TypographyStyles} from '../../../typography';
 import React from 'react';
+import {StyleProp, TextStyle} from 'react-native';
 import {Text as RnPText} from 'react-native-paper';
+import {TypographyStyles} from '../../../typography';
 
 type Props = {
   children: React.JSX.Element | string | undefined;

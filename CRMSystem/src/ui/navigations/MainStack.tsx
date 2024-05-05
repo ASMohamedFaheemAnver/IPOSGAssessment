@@ -1,11 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../screens/Home';
 import {RouteNames} from '../../constants/strings';
-import AddOrEditCustomer from '../screens/AddOrEditCustomer';
 import {Customer} from '../../redux/slices/customerSlice';
-import SalesOpportunities from '../screens/SalesOpportunities';
-import AddOrEditSalesOpportunity from '../screens/AddOrEditSalesOpportunity';
 import {SalesOpportunity} from '../../redux/slices/salesOpportunitySlice';
+import AddOrEditCustomer from '../screens/AddOrEditCustomer';
+import AddOrEditSalesOpportunity from '../screens/AddOrEditSalesOpportunity';
+import Home from '../screens/Home';
+import SalesOpportunities from '../screens/SalesOpportunities';
 
 export type MainStackParamList = {
   Home: undefined;

@@ -1,21 +1,21 @@
-import {View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {Customer, deleteCustomer} from '../../../redux/slices/customerSlice';
-import Button from '../../atoms/Button';
-import Text from '../../atoms/Text';
-import {FontWeights, TypographyStyles} from '../../../typography';
+import {View} from 'react-native';
 import {Badge, useTheme} from 'react-native-paper';
+import {useDispatch, useSelector} from 'react-redux';
+import {Gaps} from '../../../constants/numbers';
+import {IconTypes} from '../../../constants/strings';
+import {Customer, deleteCustomer} from '../../../redux/slices/customerSlice';
+import {AppDispatch, RootState} from '../../../redux/store';
 import {CommonStyles} from '../../../styles';
 import {CommonColors} from '../../../themes/colors/commonColors';
-import NetworkIconButton from '../NetworkIconButton';
-import {IconTypes, RouteNames} from '../../../constants/strings';
-import {Gaps} from '../../../constants/numbers';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../../redux/store';
-import IconButton from '../IconButton';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {FontWeights, TypographyStyles} from '../../../typography';
+import Button from '../../atoms/Button';
+import Text from '../../atoms/Text';
 import {MainStackParamList} from '../../navigations/MainStack';
+import IconButton from '../IconButton';
+import NetworkIconButton from '../NetworkIconButton';
 
 type Props = {
   customer: Customer;

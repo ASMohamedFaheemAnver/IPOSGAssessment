@@ -12,13 +12,13 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import Text from '../../atoms/Text';
-import styles from './styles';
+import {IconSizes} from '../../../constants/numbers';
 import {CommonStyles} from '../../../styles';
 import {CommonColors} from '../../../themes/colors/commonColors';
-import {IconSizes} from '../../../constants/numbers';
 import {TypographyStyles} from '../../../typography';
+import Text from '../../atoms/Text';
 import IconButton from '../IconButton';
+import styles from './styles';
 
 type Props = {
   placeholder?: string;

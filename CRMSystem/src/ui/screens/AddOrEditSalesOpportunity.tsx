@@ -1,27 +1,27 @@
-import {View} from 'react-native';
-import ScrollView from '../components/ScrollView';
-import {CommonStyles} from '../../styles';
-import Text from '../atoms/Text';
-import {FontWeights, TypographyStyles} from '../../typography';
-import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import NetworkButton from '../components/NetworkButton';
-import YupTextInput from '../components/YupTextInput';
-import YupGroupRadioButton from '../components/YupGroupRadioButton';
-import {CustomerState} from '../../redux/slices/customerSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../redux/store';
 import {useNavigation} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {MainStackParamList} from '../navigations/MainStack';
+import {useForm} from 'react-hook-form';
+import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import * as yup from 'yup';
+import {CustomerState} from '../../redux/slices/customerSlice';
 import {
   createSalesOpportunity,
   updateSalesOpportunity,
 } from '../../redux/slices/salesOpportunitySlice';
+import {AppDispatch, RootState} from '../../redux/store';
+import {CommonStyles} from '../../styles';
+import {FontWeights, TypographyStyles} from '../../typography';
+import Text from '../atoms/Text';
+import NetworkButton from '../components/NetworkButton';
+import ScrollView from '../components/ScrollView';
+import YupGroupRadioButton from '../components/YupGroupRadioButton';
+import YupTextInput from '../components/YupTextInput';
+import {MainStackParamList} from '../navigations/MainStack';
 
 // If we need to add extra functions/hooks eg. translation, move it inside component
 const formSchema = yup.object({

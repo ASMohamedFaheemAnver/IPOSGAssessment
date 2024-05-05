@@ -33,6 +33,10 @@ npm i --save-dev @types/react-native-sqlite-storage
 npm install react-hook-form
 npm install @hookform/resolvers
 
-# to use common function
+# To use common function
 npm i lodash
 npm i --save-dev @types/lodash
+
+# To organize imports
+-> https://github.com/simonhaenisch/prettier-plugin-organize-imports
+npm install --save-dev prettier-plugin-organize-imports

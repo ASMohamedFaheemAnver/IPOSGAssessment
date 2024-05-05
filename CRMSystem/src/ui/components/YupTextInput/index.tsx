@@ -1,6 +1,6 @@
 import {Control, Controller, FieldErrors} from 'react-hook-form';
-import TextInput from '../TextInput';
 import {KeyboardTypeOptions, StyleProp, ViewStyle} from 'react-native';
+import TextInput from '../TextInput';
 
 type Props = {
   control: Control<any>;

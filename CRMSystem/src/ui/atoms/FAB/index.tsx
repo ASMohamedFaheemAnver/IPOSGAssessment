@@ -1,7 +1,7 @@
+import {GestureResponderEvent} from 'react-native';
 import {FAB as RNPFAB} from 'react-native-paper';
 import {zIndices} from '../../../constants/numbers';
 import {CommonStyles} from '../../../styles';
-import {GestureResponderEvent} from 'react-native';
 import {CommonColors} from '../../../themes/colors/commonColors';
 
 type Props = {

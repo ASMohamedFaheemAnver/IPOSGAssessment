@@ -1,18 +1,18 @@
+import React from 'react';
 import {
   ActivityIndicator,
-  FlatList as RnFlatList,
-  View,
   ListRenderItem,
+  FlatList as RnFlatList,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native';
-import {CommonStyles} from '../../../styles';
-import React from 'react';
-import SubLoading from '../SubLoading';
-import {TypographyStyles} from '../../../typography';
-import {Opacities, Widths} from '../../../constants/numbers';
 import {EmptySvg} from '../../../assets/svgs';
+import {Opacities, Widths} from '../../../constants/numbers';
+import {CommonStyles} from '../../../styles';
+import {TypographyStyles} from '../../../typography';
 import Text from '../../atoms/Text';
+import SubLoading from '../SubLoading';
 
 type Props = {
   isPageLoading?: boolean;

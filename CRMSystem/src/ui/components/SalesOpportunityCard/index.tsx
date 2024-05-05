@@ -1,23 +1,23 @@
-import {View} from 'react-native';
-import React from 'react';
-import Text from '../../atoms/Text';
-import {FontWeights, TypographyStyles} from '../../../typography';
-import {Badge} from 'react-native-paper';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import NetworkIconButton from '../NetworkIconButton';
-import {IconTypes} from '../../../constants/strings';
-import {Gaps} from '../../../constants/numbers';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../../redux/store';
-import IconButton from '../IconButton';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {MainStackParamList} from '../../navigations/MainStack';
+import React from 'react';
+import {View} from 'react-native';
+import {Badge} from 'react-native-paper';
+import {useDispatch, useSelector} from 'react-redux';
+import {Gaps} from '../../../constants/numbers';
+import {IconTypes} from '../../../constants/strings';
 import {
   SalesOpportunity,
   deleteSalesOpportunity,
 } from '../../../redux/slices/salesOpportunitySlice';
+import {AppDispatch, RootState} from '../../../redux/store';
+import {CommonStyles} from '../../../styles';
+import {CommonColors} from '../../../themes/colors/commonColors';
+import {FontWeights, TypographyStyles} from '../../../typography';
+import Text from '../../atoms/Text';
+import {MainStackParamList} from '../../navigations/MainStack';
+import IconButton from '../IconButton';
+import NetworkIconButton from '../NetworkIconButton';
 
 type Props = {
   salesOpportunity: SalesOpportunity;

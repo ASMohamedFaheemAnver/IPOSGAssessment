@@ -1,20 +1,19 @@
-import FAB from '../atoms/FAB';
-import {Fragment, useCallback, useEffect} from 'react';
-import NetworkFlatList from '../components/NetworkFlatList';
-import Text from '../atoms/Text';
-import {TypographyStyles} from '../../typography';
-import {RouteNames} from '../../constants/strings';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Fragment, useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Customer,
   CustomerState,
   queryCustomers,
 } from '../../redux/slices/customerSlice';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
 import {CommonStyles} from '../../styles';
+import {TypographyStyles} from '../../typography';
+import FAB from '../atoms/FAB';
+import Text from '../atoms/Text';
 import CustomerCard from '../components/CustomerCard';
+import NetworkFlatList from '../components/NetworkFlatList';
 import {MainStackParamList} from '../navigations/MainStack';
 
 function Home(): React.JSX.Element {

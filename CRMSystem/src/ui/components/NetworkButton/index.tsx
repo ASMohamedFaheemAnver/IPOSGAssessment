@@ -6,10 +6,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
-import styles from './styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import {CommonStyles} from '../../../styles';
 import {IconSizes} from '../../../constants/numbers';
+import {CommonStyles} from '../../../styles';
+import {CommonColors} from '../../../themes/colors/commonColors';
+import styles from './styles';
 
 type Props = {
   children: React.JSX.Element;

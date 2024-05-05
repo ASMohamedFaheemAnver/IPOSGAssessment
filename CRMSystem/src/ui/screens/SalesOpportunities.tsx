@@ -1,23 +1,23 @@
-import React, {Fragment, useCallback, useEffect} from 'react';
-import NetworkFlatList from '../components/NetworkFlatList';
-import {TypographyStyles} from '../../typography';
-import {CommonStyles} from '../../styles';
-import Text from '../atoms/Text';
-import FAB from '../atoms/FAB';
+import {useNavigation} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {MainStackParamList} from '../navigations/MainStack';
-import {useNavigation} from '@react-navigation/native';
+import React, {Fragment, useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../redux/store';
 import {
   SalesOpportunity,
   SalesOpportunityState,
   querySalesOpportunities,
 } from '../../redux/slices/salesOpportunitySlice';
+import {AppDispatch, RootState} from '../../redux/store';
+import {CommonStyles} from '../../styles';
+import {TypographyStyles} from '../../typography';
+import FAB from '../atoms/FAB';
+import Text from '../atoms/Text';
+import NetworkFlatList from '../components/NetworkFlatList';
 import SalesOpportunityCard from '../components/SalesOpportunityCard';
+import {MainStackParamList} from '../navigations/MainStack';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'SalesOpportunities'>;
 

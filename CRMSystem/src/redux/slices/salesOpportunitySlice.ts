@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {ResultSet} from 'react-native-sqlite-storage';
 
 export type SalesOpportunity = {

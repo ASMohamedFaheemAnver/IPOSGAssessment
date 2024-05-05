@@ -1,15 +1,15 @@
-import {ActivityIndicator} from 'react-native-paper';
-import Button from '../../atoms/Button';
-import Icon from '../../atoms/Icon';
-import {IconSizes, Paddings} from '../../../constants/numbers';
-import {TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
 import {
   GestureResponderEvent,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import {ActivityIndicator} from 'react-native-paper';
+import {IconSizes, Paddings} from '../../../constants/numbers';
+import {TypographyStyles} from '../../../typography';
+import Button from '../../atoms/Button';
+import Icon from '../../atoms/Icon';
+import Text from '../../atoms/Text';
 
 type Props = {
   onPress?: (event: GestureResponderEvent) => void;
