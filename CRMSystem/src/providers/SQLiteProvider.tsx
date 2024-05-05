@@ -22,7 +22,7 @@ const SQLiteProvider = (props: Props) => {
       CREATE TABLE IF NOT EXISTS customers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        contactDetails TEXT,
+        phoneNumber TEXT,
         status TEXT
       );
     `);

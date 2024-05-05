@@ -1,0 +1,5 @@
+# No overload matches this call.
+  Argument of type '[string]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(options: never): void', gave the following error.
+    Argument of type 'string' is not assignable to parameter of type 'never'.
+-> https://stackoverflow.com/questions/73861337/no-overload-matches-this-call-error-react-native-navigation

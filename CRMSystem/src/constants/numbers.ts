@@ -20,3 +20,9 @@ export const Paddings = {
   normal: 10,
   big: 20,
 };
+
+export const IconSizes = {
+  small: 16,
+  normal: 24,
+  big: 32,
+};

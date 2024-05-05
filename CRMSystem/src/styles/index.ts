@@ -96,6 +96,9 @@ export const CommonStyles = StyleSheet.create({
   normalMarginTop: {
     marginTop: 10,
   },
+  normalMarginBottom: {
+    marginBottom: 10,
+  },
   normalMarginRight: {
     marginRight: 10,
   },

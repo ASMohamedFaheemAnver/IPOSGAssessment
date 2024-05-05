@@ -3,6 +3,7 @@
 npm install react-native-paper
 npm install react-native-safe-area-context
 npm install react-native-vector-icons
+npm i --save-dev @types/react-native-vector-icons
 
 # React navigation
 -> https://reactnavigation.org/docs/getting-started/
@@ -26,3 +27,12 @@ npm install react-redux
 -> https://github.com/andpor/react-native-sqlite-storage
 npm install --save react-native-sqlite-storage
 npm i --save-dev @types/react-native-sqlite-storage
+
+# Form validation
+-> https://react-hook-form.com/get-started
+npm install react-hook-form
+npm install @hookform/resolvers
+
+# to use common function
+npm i lodash
+npm i --save-dev @types/lodash
