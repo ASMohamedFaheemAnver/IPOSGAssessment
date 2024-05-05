@@ -15,6 +15,7 @@ import {AppDispatch, RootState} from '../../../redux/store';
 import IconButton from '../IconButton';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {MainStackParamList} from '../../navigations/MainStack';
 
 type Props = {
   customer: Customer;
@@ -31,13 +32,15 @@ const statusColorMap: {
 const CustomerCard = (props: Props) => {
   const {customer} = props;
   const {colors} = useTheme();
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useDispatch<AppDispatch>();
   const {deleting} = useSelector((state: RootState) => state.customer);
   console.log({deleting});
 
   return (
     <Button
+      onPress={() => navigation.navigate('SalesOpportunity', {customer})}
       style={[
         {backgroundColor: CommonColors.gray},
         CommonStyles.normalPadding,
@@ -89,7 +92,7 @@ const CustomerCard = (props: Props) => {
           />
           <IconButton
             onPress={() =>
-              navigation.navigate(RouteNames.AddOrEditCustomer.value, {
+              navigation.navigate('AddOrEditCustomer', {
                 customer,
               })
             }

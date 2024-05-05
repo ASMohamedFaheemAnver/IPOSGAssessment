@@ -6,7 +6,15 @@ export const RouteNames = {
   },
   AddOrEditCustomer: {
     value: 'AddOrEditCustomer',
-    title: 'Add or Edit Customer',
+    title: 'Add or Edit customer',
+  },
+  SalesOpportunity: {
+    value: 'SalesOpportunity',
+    title: 'Sales opportunity',
+  },
+  AddOrEditSalesOpportunity: {
+    value: 'AddOrEditSalesOpportunity',
+    title: 'Add or Edit sales opportunity',
   },
 };
 

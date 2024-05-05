@@ -2,11 +2,13 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {ResultSet} from 'react-native-sqlite-storage';
 
 export type Customer = {
-  id?: number;
+  id: number;
   name: string;
   phoneNumber: string;
   status: string;
 };
+
+export type CustomerDto = Omit<Customer, 'id'>;
 
 export type CustomerState = {
   loading: boolean;
@@ -34,7 +36,7 @@ export const queryCustomers = createAsyncThunk(
 
 export const createCustomer = createAsyncThunk(
   'customerSlice/createCustomer',
-  async ({customerDto}: {customerDto: Customer}) => {
+  async ({customerDto}: {customerDto: CustomerDto}) => {
     const {name, phoneNumber, status} = customerDto;
     const [result]: [ResultSet] = await global.db.executeSql(
       'INSERT INTO customers (name, phoneNumber, status) VALUES (?, ?, ?)',
@@ -57,17 +59,17 @@ export const deleteCustomer = createAsyncThunk(
 
 export const updateCustomer = createAsyncThunk(
   'customerSlice/updateCustomer',
-  async ({customerDto}: {customerDto: Customer}) => {
-    const {id, name, phoneNumber, status} = customerDto;
+  async ({updatedCustomer}: {updatedCustomer: Customer}) => {
+    const {id, name, phoneNumber, status} = updatedCustomer;
     await global.db.executeSql(
       'UPDATE customers SET name = ?, phoneNumber = ?, status = ? WHERE id = ?',
       [name, phoneNumber, status, id],
     );
-    return customerDto;
+    return updatedCustomer;
   },
 );
 
-export const customerSlice = createSlice({
+const customerSlice = createSlice({
   name: 'customerSlice',
   initialState,
   reducers: {},
@@ -122,7 +124,7 @@ export const customerSlice = createSlice({
     builder
       .addCase(updateCustomer.pending, (state, action) => {
         state.loading = true;
-        state.updating = action.meta.arg.customerDto.id;
+        state.updating = action.meta.arg.updatedCustomer.id;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.loading = false;

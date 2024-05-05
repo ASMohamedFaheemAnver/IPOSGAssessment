@@ -8,22 +8,11 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import NetworkButton from '../components/NetworkButton';
 import YupTextInput from '../components/YupTextInput';
-import {PHONE_REG_EXP} from '../../constants/reg-exp';
 import YupGroupRadioButton from '../components/YupGroupRadioButton';
-import {
-  Customer,
-  CustomerState,
-  createCustomer,
-  updateCustomer,
-} from '../../redux/slices/customerSlice';
+import {CustomerState} from '../../redux/slices/customerSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
-import {
-  ParamListBase,
-  RouteProp,
-  useNavigation,
-} from '@react-navigation/native';
-import {RouteNames} from '../../constants/strings';
+import {useNavigation} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -33,19 +22,17 @@ import {MainStackParamList} from '../navigations/MainStack';
 // If we need to add extra functions/hooks eg. translation, move it inside component
 const formSchema = yup.object({
   name: yup.string().min(1).required(),
-  phoneNumber: yup
-    .string()
-    .matches(PHONE_REG_EXP, 'Phone number must be valid')
-    .required(),
   status: yup.string().required(),
 });
 type CustomerFormValues = yup.InferType<typeof formSchema>;
 
-type Props = NativeStackScreenProps<MainStackParamList, 'AddOrEditCustomer'>;
+type Props = NativeStackScreenProps<
+  MainStackParamList,
+  'AddOrEditSalesOpportunity'
+>;
 
-const AddOrEditCustomer = (props: Props) => {
-  const customer = props.route?.params?.customer;
-  console.log({customer});
+const AddOrEditSalesOpportunity = (props: Props) => {
+  const customerId = props.route?.params?.customerId;
   const {loading}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
@@ -54,18 +41,14 @@ const AddOrEditCustomer = (props: Props) => {
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
   const STATUS_OPTIONS = [
-    {value: 'active', label: 'Active'},
-    {value: 'inactive', label: 'Inactive'},
-    {value: 'lead', label: 'Lead'},
+    {value: 'new', label: 'New'},
+    {value: 'closedWon', label: 'Closed Won'},
+    {value: 'closedLost', label: 'Closed Lost'},
   ];
 
   const methods = useForm<CustomerFormValues>({
     resolver: yupResolver(formSchema),
-    defaultValues: {
-      name: customer?.name,
-      phoneNumber: customer?.phoneNumber,
-      status: customer?.status || 'active',
-    },
+    defaultValues: {},
     mode: 'all',
   });
 
@@ -76,19 +59,11 @@ const AddOrEditCustomer = (props: Props) => {
   } = methods;
 
   const onCreateOrEditCustomer = async (values: CustomerFormValues) => {
-    if (customer) {
-      await dispatch(
-        updateCustomer({
-          updatedCustomer: {...values, id: customer.id},
-        }),
-      );
-    } else {
-      await dispatch(
-        createCustomer({
-          customerDto: values,
-        }),
-      );
-    }
+    // await dispatch(
+    //   createCustomer({
+    //     customerDto: values,
+    //   }),
+    // );
     navigation.navigate('Home');
   };
 
@@ -101,29 +76,21 @@ const AddOrEditCustomer = (props: Props) => {
             CommonStyles.smallMarginBottom,
             {fontWeight: FontWeights.bold},
           ]}>
-          Add or Edit customers
+          Add or Edit sales opportunity
         </Text>
         <Text>
-          Please make sure to fill all required fields before adding customer
+          Please make sure to fill all required fields before sales opportunity
         </Text>
       </View>
       <YupTextInput
         containerStyle={[CommonStyles.bigMarginBottom]}
         control={control}
         name={'name'}
-        placeholder={'Customer name'}
+        placeholder={'Opportunity name'}
         errors={errors}
-      />
-      <YupTextInput
-        containerStyle={[CommonStyles.bigMarginBottom]}
-        control={control}
-        name={'phoneNumber'}
-        placeholder={'Enter customer phone number'}
-        errors={errors}
-        keyboardType="number-pad"
       />
       <YupGroupRadioButton
-        label={'Select customer status'}
+        label={'Select opportunity status'}
         containerStyle={[CommonStyles.bigMarginBottom]}
         options={STATUS_OPTIONS}
         control={control}
@@ -134,10 +101,10 @@ const AddOrEditCustomer = (props: Props) => {
         loading={loading}
         disabled={!isValid || loading}
         onPress={handleSubmit(onCreateOrEditCustomer)}>
-        <Text style={{color: 'white'}}>{customer ? 'Edit' : 'Add'}</Text>
+        <Text style={{color: 'white'}}>{'Add'}</Text>
       </NetworkButton>
     </ScrollView>
   );
 };
 
-export default AddOrEditCustomer;
+export default AddOrEditSalesOpportunity;

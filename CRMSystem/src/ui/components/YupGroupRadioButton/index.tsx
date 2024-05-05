@@ -34,7 +34,7 @@ const YupGroupRadioButton = (props: Props) => {
               <View style={{flexDirection: 'row'}}>
                 {options.map(option => {
                   return (
-                    <View key={option.value} style={{flex: 1}}>
+                    <View key={option.value}>
                       <RadioButton.Item
                         label={option.label}
                         labelVariant="bodyMedium"

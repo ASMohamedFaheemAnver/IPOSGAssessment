@@ -15,9 +15,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
 import {CommonStyles} from '../../styles';
 import CustomerCard from '../components/CustomerCard';
+import {MainStackParamList} from '../navigations/MainStack';
 
 function Home(): React.JSX.Element {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const {customers, loading}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
@@ -44,9 +46,7 @@ function Home(): React.JSX.Element {
         }}
         emptyMessage="No customers registered."
       />
-      <FAB
-        onPress={() => navigation.navigate(RouteNames.AddOrEditCustomer.value)}
-      />
+      <FAB onPress={() => navigation.navigate('AddOrEditCustomer')} />
     </Fragment>
   );
 }
