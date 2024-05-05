@@ -50,22 +50,30 @@ export const createCustomer = createAsyncThunk(
 export const deleteCustomer = createAsyncThunk(
   'customerSlice/deleteCustomer',
   async (customerId: number) => {
-    await global.db.executeSql('DELETE FROM customers WHERE id = ?', [
-      customerId,
-    ]);
+    // Begin a transaction to ensure atomicity
+    await global.db.transaction(tx => {
+      return Promise.all([
+        // Delete the customer
+        tx.executeSql('DELETE FROM customers WHERE id = ?', [customerId]),
+        // Delete associated opportunities
+        tx.executeSql('DELETE FROM opportunities WHERE customerId = ?', [
+          customerId,
+        ]),
+      ]);
+    });
     return customerId;
   },
 );
 
 export const updateCustomer = createAsyncThunk(
   'customerSlice/updateCustomer',
-  async ({updatedCustomer}: {updatedCustomer: Customer}) => {
-    const {id, name, phoneNumber, status} = updatedCustomer;
+  async ({updateCustomerDto}: {updateCustomerDto: Customer}) => {
+    const {id, name, phoneNumber, status} = updateCustomerDto;
     await global.db.executeSql(
       'UPDATE customers SET name = ?, phoneNumber = ?, status = ? WHERE id = ?',
       [name, phoneNumber, status, id],
     );
-    return updatedCustomer;
+    return updateCustomerDto;
   },
 );
 
@@ -124,7 +132,7 @@ const customerSlice = createSlice({
     builder
       .addCase(updateCustomer.pending, (state, action) => {
         state.loading = true;
-        state.updating = action.meta.arg.updatedCustomer.id;
+        state.updating = action.meta.arg.updateCustomerDto.id;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.loading = false;

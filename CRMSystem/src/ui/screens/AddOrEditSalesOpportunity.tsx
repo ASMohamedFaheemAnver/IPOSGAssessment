@@ -18,6 +18,10 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {MainStackParamList} from '../navigations/MainStack';
+import {
+  createSalesOpportunity,
+  updateSalesOpportunity,
+} from '../../redux/slices/salesOpportunitySlice';
 
 // If we need to add extra functions/hooks eg. translation, move it inside component
 const formSchema = yup.object({
@@ -32,7 +36,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const AddOrEditSalesOpportunity = (props: Props) => {
-  const customerId = props.route?.params?.customerId;
+  const {customerId, salesOpportunity} = props.route?.params;
   const {loading}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
@@ -48,7 +52,10 @@ const AddOrEditSalesOpportunity = (props: Props) => {
 
   const methods = useForm<CustomerFormValues>({
     resolver: yupResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      name: salesOpportunity?.name,
+      status: salesOpportunity?.status,
+    },
     mode: 'all',
   });
 
@@ -59,12 +66,21 @@ const AddOrEditSalesOpportunity = (props: Props) => {
   } = methods;
 
   const onCreateOrEditCustomer = async (values: CustomerFormValues) => {
-    // await dispatch(
-    //   createCustomer({
-    //     customerDto: values,
-    //   }),
-    // );
-    navigation.navigate('Home');
+    if (salesOpportunity) {
+      await dispatch(
+        updateSalesOpportunity({
+          updateSalesOpportunityDto: {...salesOpportunity, ...values},
+        }),
+      );
+    } else {
+      await dispatch(
+        createSalesOpportunity({
+          salesOpportunityDto: {...values, customerId},
+        }),
+      );
+    }
+
+    navigation.goBack();
   };
 
   return (
@@ -101,7 +117,9 @@ const AddOrEditSalesOpportunity = (props: Props) => {
         loading={loading}
         disabled={!isValid || loading}
         onPress={handleSubmit(onCreateOrEditCustomer)}>
-        <Text style={{color: 'white'}}>{'Add'}</Text>
+        <Text style={{color: 'white'}}>
+          {salesOpportunity ? 'Edit' : 'Add'}
+        </Text>
       </NetworkButton>
     </ScrollView>
   );

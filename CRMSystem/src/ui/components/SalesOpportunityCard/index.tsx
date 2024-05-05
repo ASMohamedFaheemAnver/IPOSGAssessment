@@ -1,45 +1,45 @@
 import {View} from 'react-native';
 import React from 'react';
-import {Customer, deleteCustomer} from '../../../redux/slices/customerSlice';
-import Button from '../../atoms/Button';
 import Text from '../../atoms/Text';
 import {FontWeights, TypographyStyles} from '../../../typography';
-import {Badge, useTheme} from 'react-native-paper';
+import {Badge} from 'react-native-paper';
 import {CommonStyles} from '../../../styles';
 import {CommonColors} from '../../../themes/colors/commonColors';
 import NetworkIconButton from '../NetworkIconButton';
-import {IconTypes, RouteNames} from '../../../constants/strings';
+import {IconTypes} from '../../../constants/strings';
 import {Gaps} from '../../../constants/numbers';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../redux/store';
 import IconButton from '../IconButton';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MainStackParamList} from '../../navigations/MainStack';
+import {
+  SalesOpportunity,
+  deleteSalesOpportunity,
+} from '../../../redux/slices/salesOpportunitySlice';
 
 type Props = {
-  customer: Customer;
+  salesOpportunity: SalesOpportunity;
 };
 
 const statusColorMap: {
   [key: string]: string;
 } = {
-  active: CommonColors.green,
-  inactive: CommonColors.red,
-  lead: CommonColors.orange,
+  new: CommonColors.green,
+  closedLost: CommonColors.red,
+  closedWon: CommonColors.orange,
 };
 
-const CustomerCard = (props: Props) => {
-  const {customer} = props;
-  const {colors} = useTheme();
+const SalesOpportunityCard = (props: Props) => {
+  const {salesOpportunity} = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useDispatch<AppDispatch>();
-  const {deleting} = useSelector((state: RootState) => state.customer);
+  const {deleting} = useSelector((state: RootState) => state.salesOpportunity);
 
   return (
-    <Button
-      onPress={() => navigation.navigate('SalesOpportunities', {customer})}
+    <View
       style={[
         {backgroundColor: CommonColors.gray},
         CommonStyles.normalPadding,
@@ -50,21 +50,18 @@ const CustomerCard = (props: Props) => {
         <View style={[{flex: 1, alignItems: 'flex-start', gap: Gaps.small}]}>
           <Text
             style={[TypographyStyles.body1, {fontWeight: FontWeights.bold}]}>
-            {customer.name}
-          </Text>
-          <Text style={[TypographyStyles.caption1, {color: colors.secondary}]}>
-            {customer.phoneNumber}
+            {salesOpportunity.name}
           </Text>
           <Badge
             style={[
               TypographyStyles.caption1,
               {
                 alignSelf: 'flex-start',
-                backgroundColor: statusColorMap[customer.status],
+                backgroundColor: statusColorMap[salesOpportunity.status],
                 fontWeight: FontWeights.medium,
               },
             ]}>
-            {customer.status}
+            {salesOpportunity.status}
           </Badge>
         </View>
         {/* Right */}
@@ -78,8 +75,10 @@ const CustomerCard = (props: Props) => {
             },
           ]}>
           <NetworkIconButton
-            onPress={() => dispatch(deleteCustomer(customer.id!))}
-            loading={deleting === customer.id}
+            onPress={() =>
+              dispatch(deleteSalesOpportunity(salesOpportunity.id!))
+            }
+            loading={deleting === salesOpportunity.id}
             buttonStyle={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -91,8 +90,9 @@ const CustomerCard = (props: Props) => {
           />
           <IconButton
             onPress={() =>
-              navigation.navigate('AddOrEditCustomer', {
-                customer,
+              navigation.navigate('AddOrEditSalesOpportunity', {
+                customerId: salesOpportunity.customerId,
+                salesOpportunity: salesOpportunity,
               })
             }
             buttonStyle={{
@@ -106,8 +106,8 @@ const CustomerCard = (props: Props) => {
           />
         </View>
       </View>
-    </Button>
+    </View>
   );
 };
 
-export default CustomerCard;
+export default SalesOpportunityCard;

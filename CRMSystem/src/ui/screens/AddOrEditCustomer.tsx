@@ -45,7 +45,6 @@ type Props = NativeStackScreenProps<MainStackParamList, 'AddOrEditCustomer'>;
 
 const AddOrEditCustomer = (props: Props) => {
   const customer = props.route?.params?.customer;
-  console.log({customer});
   const {loading}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
@@ -79,7 +78,7 @@ const AddOrEditCustomer = (props: Props) => {
     if (customer) {
       await dispatch(
         updateCustomer({
-          updatedCustomer: {...values, id: customer.id},
+          updateCustomerDto: {...values, id: customer.id},
         }),
       );
     } else {

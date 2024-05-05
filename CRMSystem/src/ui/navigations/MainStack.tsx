@@ -3,14 +3,18 @@ import Home from '../screens/Home';
 import {RouteNames} from '../../constants/strings';
 import AddOrEditCustomer from '../screens/AddOrEditCustomer';
 import {Customer} from '../../redux/slices/customerSlice';
-import SalesOpportunity from '../screens/SalesOpportunity';
+import SalesOpportunities from '../screens/SalesOpportunities';
 import AddOrEditSalesOpportunity from '../screens/AddOrEditSalesOpportunity';
+import {SalesOpportunity} from '../../redux/slices/salesOpportunitySlice';
 
 export type MainStackParamList = {
   Home: undefined;
   AddOrEditCustomer?: {customer?: Customer};
-  SalesOpportunity: {customer: Customer};
-  AddOrEditSalesOpportunity: {customerId: number};
+  SalesOpportunities: {customer: Customer};
+  AddOrEditSalesOpportunity: {
+    customerId: number;
+    salesOpportunity?: SalesOpportunity;
+  };
 };
 
 const MainStack = (): React.JSX.Element => {
@@ -33,16 +37,16 @@ const MainStack = (): React.JSX.Element => {
         component={AddOrEditCustomer}
       />
       <Stack.Screen
-        name={'SalesOpportunity'}
+        name={'SalesOpportunities'}
         options={{
-          title: RouteNames.SalesOpportunity.title,
+          title: RouteNames.SalesOpportunities.title,
         }}
-        component={SalesOpportunity}
+        component={SalesOpportunities}
       />
       <Stack.Screen
         name={'AddOrEditSalesOpportunity'}
         options={{
-          title: RouteNames.SalesOpportunity.title,
+          title: RouteNames.AddOrEditSalesOpportunity.title,
         }}
         component={AddOrEditSalesOpportunity}
       />
