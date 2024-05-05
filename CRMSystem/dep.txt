@@ -21,3 +21,8 @@ npm install react-native-svg
 npm install @reduxjs/toolkit
 npm install react-redux
 -> typescript: https://react-redux.js.org/tutorials/typescript-quick-start
+
+# Data store
+-> https://github.com/andpor/react-native-sqlite-storage
+npm install --save react-native-sqlite-storage
+npm i --save-dev @types/react-native-sqlite-storage

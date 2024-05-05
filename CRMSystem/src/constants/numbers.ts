@@ -14,3 +14,9 @@ export const Opacities = {
 export const Widths = {
   emptyImage: 280,
 };
+
+export const Paddings = {
+  small: 5,
+  normal: 10,
+  big: 20,
+};

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const CommonStyles = StyleSheet.create({
   // Common flex start
-  fullFlex: {flex: 1},
+  // fullFlex: {flex: 1},
   // Common flex end
 
   // Common heights start

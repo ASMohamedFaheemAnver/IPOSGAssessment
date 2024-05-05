@@ -3,8 +3,6 @@ import {Fragment} from 'react';
 import NetworkFlatList from '../components/NetworkFlatList';
 import Text from '../atoms/Text';
 import {TypographyStyles} from '../../typography';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
 
 function Home(): React.JSX.Element {
   return (

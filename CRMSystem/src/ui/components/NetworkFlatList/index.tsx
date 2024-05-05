@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {CommonStyles} from '../../../styles';
 import React from 'react';
-import SubLoading from '../../SubLoading';
+import SubLoading from '../SubLoading';
 import {TypographyStyles} from '../../../typography';
 import {Opacities, Widths} from '../../../constants/numbers';
 import {EmptySvg} from '../../../assets/svgs';
