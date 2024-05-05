@@ -10,6 +10,12 @@ import NetworkButton from '../components/NetworkButton';
 import YupTextInput from '../components/YupTextInput';
 import {PHONE_REG_EXP} from '../../constants/reg-exp';
 import YupGroupRadioButton from '../components/YupGroupRadioButton';
+import {CustomerState, createCustomer} from '../../redux/slices/customerSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {RouteNames} from '../../constants/strings';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 // If we need to add extra functions/hooks eg. translation, move it inside component
 const formSchema = yup.object({
@@ -23,6 +29,12 @@ const formSchema = yup.object({
 type CustomerFormValues = yup.InferType<typeof formSchema>;
 
 const AddOrEditCustomer = () => {
+  const {loading}: CustomerState = useSelector(
+    (state: RootState) => state.customer,
+  );
+  const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   const STATUS_OPTIONS = [
     {value: 'active', label: 'Active'},
     {value: 'inactive', label: 'Inactive'},
@@ -43,8 +55,13 @@ const AddOrEditCustomer = () => {
     formState: {isValid, errors},
   } = methods;
 
-  const onCreateOrEditCustomer = (values: CustomerFormValues) => {
-    console.log({values});
+  const onCreateOrEditCustomer = async (values: CustomerFormValues) => {
+    await dispatch(
+      createCustomer({
+        customerDto: values,
+      }),
+    );
+    navigation.navigate(RouteNames.Home.value);
   };
 
   return (
@@ -86,7 +103,8 @@ const AddOrEditCustomer = () => {
         errors={errors}
       />
       <NetworkButton
-        disabled={!isValid}
+        loading={loading}
+        disabled={!isValid || loading}
         onPress={handleSubmit(onCreateOrEditCustomer)}>
         <Text style={{color: 'white'}}>Create</Text>
       </NetworkButton>

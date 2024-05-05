@@ -14,13 +14,11 @@ import {Opacities, Widths} from '../../../constants/numbers';
 import {EmptySvg} from '../../../assets/svgs';
 import Text from '../../atoms/Text';
 
-type ListData = any[] | undefined | null;
-
 type Props = {
   isPageLoading?: boolean;
   refreshing?: boolean;
-  data: ListData;
-  renderItem: ListRenderItem<ListData> | undefined | null;
+  data: any;
+  renderItem: ListRenderItem<any>;
   ListHeaderComponent?: React.JSX.Element;
   onRefresh?: () => void;
   onEndReached?: () => void;

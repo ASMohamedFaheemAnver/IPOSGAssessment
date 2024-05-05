@@ -1,26 +1,47 @@
 import FAB from '../atoms/FAB';
-import {Fragment} from 'react';
+import {Fragment, useCallback, useEffect} from 'react';
 import NetworkFlatList from '../components/NetworkFlatList';
 import Text from '../atoms/Text';
 import {TypographyStyles} from '../../typography';
 import {RouteNames} from '../../constants/strings';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  Customer,
+  CustomerState,
+  queryCustomers,
+} from '../../redux/slices/customerSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store';
+import {CommonStyles} from '../../styles';
+import CustomerCard from '../components/CustomerCard';
 
 function Home(): React.JSX.Element {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+  const {customers, loading}: CustomerState = useSelector(
+    (state: RootState) => state.customer,
+  );
+  const dispatch = useDispatch<AppDispatch>();
+  const getCustomers = useCallback(() => {
+    dispatch(queryCustomers());
+  }, []);
+  useEffect(() => {
+    getCustomers();
+  }, []);
   return (
     <Fragment>
       <NetworkFlatList
         ListHeaderComponent={
-          <Text style={[TypographyStyles.title1]}>Registered customers</Text>
+          <Text style={[TypographyStyles.title1, CommonStyles.bigMarginBottom]}>
+            Registered customers
+          </Text>
         }
-        refreshing={true}
-        onRefresh={() => {
-          console.log({msg: 'pulling'});
+        refreshing={loading}
+        onRefresh={getCustomers}
+        data={customers}
+        renderItem={({item}: {item: Customer}) => {
+          return <CustomerCard customer={item} />;
         }}
-        data={[]}
-        renderItem={null}
         emptyMessage="No customers registered."
       />
       <FAB

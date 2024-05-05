@@ -11,7 +11,7 @@ type Props = {
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
   disabledStyle?: StyleProp<ViewStyle>;
-  children: React.JSX.Element;
+  children: React.JSX.Element | React.JSX.Element[];
 };
 
 export default function Button(props: Props) {

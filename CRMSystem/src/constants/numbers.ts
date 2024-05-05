@@ -26,3 +26,9 @@ export const IconSizes = {
   normal: 24,
   big: 32,
 };
+
+export const Gaps = {
+  small: 2,
+  normal: 8,
+  big: 16,
+};

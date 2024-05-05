@@ -8,7 +8,7 @@ export const CommonColors = {
   orange: '#E5634D',
   blue: '#5DADE2',
   pink: '#A569BD',
-  green: '#58D68D',
+  green: '#3AA978',
   gold: '#D5C073',
   lightGray: '#E7E9EC',
   black: '#303030',
