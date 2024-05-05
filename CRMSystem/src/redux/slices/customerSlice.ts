@@ -13,6 +13,7 @@ export type CustomerState = {
   customers: Customer[];
   error: string | undefined | null;
   deleting?: number;
+  updating?: number;
 };
 
 const initialState: CustomerState = {
@@ -51,6 +52,18 @@ export const deleteCustomer = createAsyncThunk(
       customerId,
     ]);
     return customerId;
+  },
+);
+
+export const updateCustomer = createAsyncThunk(
+  'customerSlice/updateCustomer',
+  async ({customerDto}: {customerDto: Customer}) => {
+    const {id, name, phoneNumber, status} = customerDto;
+    await global.db.executeSql(
+      'UPDATE customers SET name = ?, phoneNumber = ?, status = ? WHERE id = ?',
+      [name, phoneNumber, status, id],
+    );
+    return customerDto;
   },
 );
 
@@ -101,6 +114,26 @@ export const customerSlice = createSlice({
         state.customers = state.customers.filter(c => c.id !== action.payload);
       })
       .addCase(deleteCustomer.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+    // updateCustomer
+    builder
+      .addCase(updateCustomer.pending, (state, action) => {
+        state.loading = true;
+        state.updating = action.meta.arg.customerDto.id;
+      })
+      .addCase(updateCustomer.fulfilled, (state, action) => {
+        state.loading = false;
+        state.customers = state.customers.map(c => {
+          if (c.id === action.payload.id) {
+            return action.payload;
+          }
+          return c;
+        });
+      })
+      .addCase(updateCustomer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

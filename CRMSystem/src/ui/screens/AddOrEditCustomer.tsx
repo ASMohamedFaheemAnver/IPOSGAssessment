@@ -10,10 +10,19 @@ import NetworkButton from '../components/NetworkButton';
 import YupTextInput from '../components/YupTextInput';
 import {PHONE_REG_EXP} from '../../constants/reg-exp';
 import YupGroupRadioButton from '../components/YupGroupRadioButton';
-import {CustomerState, createCustomer} from '../../redux/slices/customerSlice';
+import {
+  Customer,
+  CustomerState,
+  createCustomer,
+  updateCustomer,
+} from '../../redux/slices/customerSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {
+  ParamListBase,
+  RouteProp,
+  useNavigation,
+} from '@react-navigation/native';
 import {RouteNames} from '../../constants/strings';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -24,11 +33,17 @@ const formSchema = yup.object({
     .string()
     .matches(PHONE_REG_EXP, 'Phone number must be valid')
     .required(),
-  status: yup.string().oneOf(['active', 'inactive', 'lead']).required(),
+  status: yup.string().required(),
 });
 type CustomerFormValues = yup.InferType<typeof formSchema>;
 
-const AddOrEditCustomer = () => {
+type Props = {
+  route: RouteProp<{params?: {customer?: Customer}}>;
+};
+
+const AddOrEditCustomer = (props: Props) => {
+  const customer = props.route?.params?.customer;
+  console.log({customer});
   const {loading}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
@@ -44,7 +59,9 @@ const AddOrEditCustomer = () => {
   const methods = useForm<CustomerFormValues>({
     resolver: yupResolver(formSchema),
     defaultValues: {
-      status: 'active',
+      name: customer?.name,
+      phoneNumber: customer?.phoneNumber,
+      status: customer?.status || 'active',
     },
     mode: 'all',
   });
@@ -56,11 +73,19 @@ const AddOrEditCustomer = () => {
   } = methods;
 
   const onCreateOrEditCustomer = async (values: CustomerFormValues) => {
-    await dispatch(
-      createCustomer({
-        customerDto: values,
-      }),
-    );
+    if (customer) {
+      await dispatch(
+        updateCustomer({
+          customerDto: {...values, id: customer.id},
+        }),
+      );
+    } else {
+      await dispatch(
+        createCustomer({
+          customerDto: values,
+        }),
+      );
+    }
     navigation.navigate(RouteNames.Home.value);
   };
 
@@ -106,7 +131,7 @@ const AddOrEditCustomer = () => {
         loading={loading}
         disabled={!isValid || loading}
         onPress={handleSubmit(onCreateOrEditCustomer)}>
-        <Text style={{color: 'white'}}>Create</Text>
+        <Text style={{color: 'white'}}>{customer ? 'Edit' : 'Add'}</Text>
       </NetworkButton>
     </ScrollView>
   );

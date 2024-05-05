@@ -8,10 +8,13 @@ import {Badge, useTheme} from 'react-native-paper';
 import {CommonStyles} from '../../../styles';
 import {CommonColors} from '../../../themes/colors/commonColors';
 import NetworkIconButton from '../NetworkIconButton';
-import {IconTypes} from '../../../constants/strings';
+import {IconTypes, RouteNames} from '../../../constants/strings';
 import {Gaps} from '../../../constants/numbers';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../redux/store';
+import IconButton from '../IconButton';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type Props = {
   customer: Customer;
@@ -28,7 +31,7 @@ const statusColorMap: {
 const CustomerCard = (props: Props) => {
   const {customer} = props;
   const {colors} = useTheme();
-
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const dispatch = useDispatch<AppDispatch>();
   const {deleting} = useSelector((state: RootState) => state.customer);
   console.log({deleting});
@@ -84,7 +87,12 @@ const CustomerCard = (props: Props) => {
             iconName="delete"
             iconStyle={{color: CommonColors.red}}
           />
-          <NetworkIconButton
+          <IconButton
+            onPress={() =>
+              navigation.navigate(RouteNames.AddOrEditCustomer.value, {
+                customer,
+              })
+            }
             buttonStyle={{
               justifyContent: 'center',
               alignItems: 'center',
