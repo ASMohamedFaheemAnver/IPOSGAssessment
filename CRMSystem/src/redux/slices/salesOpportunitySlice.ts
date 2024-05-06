@@ -29,7 +29,6 @@ export const querySalesOpportunities = createAsyncThunk(
   async ({
     customerId,
     searchQuery,
-    status,
   }: {
     customerId: number;
     searchQuery?: string;
@@ -39,10 +38,9 @@ export const querySalesOpportunities = createAsyncThunk(
       `SELECT * FROM opportunities 
         WHERE 
           customerId = ? AND
-          name LIKE ? AND
-          status LIKE ? 
+          name LIKE ?
         ORDER BY id desc`,
-      [customerId, `%${searchQuery || ''}%`, `%${status || ''}%`],
+      [customerId, `%${searchQuery || ''}%`],
     );
     return result?.rows?.raw?.();
   },
