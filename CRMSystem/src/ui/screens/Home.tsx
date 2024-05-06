@@ -34,20 +34,18 @@ function Home(): React.JSX.Element {
     getCustomers();
   }, []);
 
-  const queryRef = useRef('');
+  const queryRef = useRef(''); // Hold value of search key to paginate with query
 
   const searchCustomer = debounce(query => {
     queryRef.current = query;
-    getCustomers(query, 0);
+    getCustomers(query, 0); // Always reset page number on new query search
   }, CommonDelays.debounce);
 
   const onEndReached = () => {
     if (!isLastPage) {
-      getCustomers(queryRef.current, page + 1);
+      getCustomers(queryRef.current, page + 1); // On list end, fetch next page
     }
   };
-
-  console.log({isLastPage});
 
   return (
     <Fragment>

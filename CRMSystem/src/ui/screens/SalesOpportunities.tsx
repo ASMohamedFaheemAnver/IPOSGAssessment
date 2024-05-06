@@ -4,7 +4,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {debounce} from 'lodash';
-import React, {Fragment, useCallback, useEffect} from 'react';
+import React, {Fragment, useCallback, useEffect, useRef} from 'react';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {CommonDelays} from '../../constants/numbers';
@@ -31,23 +31,34 @@ const SalesOpportunities = (props: Props) => {
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const getSalesOpportunities = useCallback(() => {
-    dispatch(querySalesOpportunities({customerId: customer.id}));
+  const getSalesOpportunities = useCallback((query?: string, page?: number) => {
+    dispatch(
+      querySalesOpportunities({
+        customerId: customer.id,
+        searchQuery: query,
+        page,
+      }),
+    );
   }, []);
 
   useEffect(() => {
     getSalesOpportunities();
   }, []);
 
-  const {salesOpportunities, loading}: SalesOpportunityState = useSelector(
-    (state: RootState) => state.salesOpportunity,
-  );
+  const {salesOpportunities, isLastPage, page, loading}: SalesOpportunityState =
+    useSelector((state: RootState) => state.salesOpportunity);
+  const queryRef = useRef(''); // Hold value of search key to paginate with query
 
   const searchCustomer = debounce(query => {
-    dispatch(
-      querySalesOpportunities({customerId: customer.id, searchQuery: query}),
-    );
+    queryRef.current = query;
+    getSalesOpportunities(query, 0); // Always reset page number on new query search
   }, CommonDelays.debounce);
+
+  const onEndReached = () => {
+    if (!isLastPage) {
+      getSalesOpportunities(queryRef.current, page + 1); // On list end, fetch next page
+    }
+  };
 
   return (
     <Fragment>
@@ -61,7 +72,7 @@ const SalesOpportunities = (props: Props) => {
             />
             <Text
               style={[TypographyStyles.title1, CommonStyles.bigMarginBottom]}>
-              {`${customer.name}'s sales opportunities`}
+              {`${customer.name}'s sales opportunities (${salesOpportunities.length})`}
             </Text>
           </View>
         }
@@ -72,6 +83,7 @@ const SalesOpportunities = (props: Props) => {
           <SalesOpportunityCard salesOpportunity={item} />
         )}
         emptyMessage="No sales opportunities."
+        onEndReached={onEndReached}
       />
       <FAB
         onPress={() =>

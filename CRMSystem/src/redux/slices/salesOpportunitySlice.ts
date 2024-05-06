@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {union, uniqBy} from 'lodash';
 import {ResultSet} from 'react-native-sqlite-storage';
 
 export type SalesOpportunityStatus = 'new' | 'closedWon' | 'closedLost';
@@ -18,12 +19,18 @@ export type SalesOpportunityState = {
   error: string | undefined | null;
   deleting?: number;
   updating?: number;
+  page: number;
+  size: number;
+  isLastPage: boolean;
 };
 
 const initialState: SalesOpportunityState = {
   loading: false,
   salesOpportunities: [],
   error: null,
+  page: 0,
+  size: 10,
+  isLastPage: false,
 };
 
 export const querySalesOpportunities = createAsyncThunk(
@@ -31,18 +38,26 @@ export const querySalesOpportunities = createAsyncThunk(
   async ({
     customerId,
     searchQuery,
+    page,
+    size,
   }: {
     customerId: number;
     searchQuery?: string;
-    status?: string;
+    page?: number;
+    size?: number;
   }) => {
+    const fSize = size || 10;
+    const fPage = page || 0;
+    const offset = fPage * fSize;
     const [result]: [ResultSet] = await global.db.executeSql(
       `SELECT * FROM opportunities 
         WHERE 
           customerId = ? AND
           name LIKE ?
-        ORDER BY id desc`,
-      [customerId, `%${searchQuery || ''}%`],
+        ORDER BY id DESC 
+        LIMIT ? OFFSET ?
+        `,
+      [customerId, `%${searchQuery || ''}%`, fSize, offset],
     );
     return result?.rows?.raw?.();
   },
@@ -99,7 +114,20 @@ const salesOpportunitySlice = createSlice({
       })
       .addCase(querySalesOpportunities.fulfilled, (state, action) => {
         state.loading = false;
-        state.salesOpportunities = action.payload;
+        if (action.meta.arg?.page) {
+          state.salesOpportunities = uniqBy(
+            union(state.salesOpportunities, action.payload),
+            'id',
+          );
+        } else {
+          state.salesOpportunities = action.payload;
+        }
+        state.page = action.meta.arg?.page || 0;
+        if (!action.payload.length) {
+          state.isLastPage = true;
+        } else {
+          state.isLastPage = false;
+        }
       })
       .addCase(querySalesOpportunities.rejected, (state, action) => {
         state.loading = false;
