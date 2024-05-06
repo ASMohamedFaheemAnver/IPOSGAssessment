@@ -3,3 +3,7 @@
   Overload 2 of 2, '(options: never): void', gave the following error.
     Argument of type 'string' is not assignable to parameter of type 'never'.
 -> https://stackoverflow.com/questions/73861337/no-overload-matches-this-call-error-react-native-navigation
+
+
+# Testing redux and react native with testing library
+-> https://www.youtube.com/watch?v=Uh01lkHDaKw

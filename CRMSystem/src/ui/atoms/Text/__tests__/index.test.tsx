@@ -2,7 +2,7 @@ import {render} from '@testing-library/react-native';
 import '@testing-library/react-native/extend-expect';
 import React from 'react';
 import 'react-native';
-import Text from '../';
+import Text from '..';
 
 describe('<Text />', () => {
   it('renders children text correctly', () => {
