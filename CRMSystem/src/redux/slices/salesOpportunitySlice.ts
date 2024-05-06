@@ -26,10 +26,23 @@ const initialState: SalesOpportunityState = {
 
 export const querySalesOpportunities = createAsyncThunk(
   'salesOpportunitySlice/querySalesOpportunities',
-  async (customerId: number) => {
+  async ({
+    customerId,
+    searchQuery,
+    status,
+  }: {
+    customerId: number;
+    searchQuery?: string;
+    status?: string;
+  }) => {
     const [result]: [ResultSet] = await global.db.executeSql(
-      'SELECT * FROM opportunities WHERE customerId = ? ORDER BY id desc',
-      [customerId],
+      `SELECT * FROM opportunities 
+        WHERE 
+          customerId = ? AND
+          name LIKE ? AND
+          status LIKE ? 
+        ORDER BY id desc`,
+      [customerId, `%${searchQuery || ''}%`, `%${status || ''}%`],
     );
     return result?.rows?.raw?.();
   },

@@ -32,3 +32,14 @@ export const Gaps = {
   normal: 8,
   big: 16,
 };
+
+export const Heights = {
+  commonInput: 60,
+};
+
+export const CommonDelays = {
+  small: 250,
+  normal: 500,
+  big: 750,
+  debounce: 500,
+};

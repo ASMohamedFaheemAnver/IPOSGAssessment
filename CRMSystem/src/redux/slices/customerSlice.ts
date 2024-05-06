@@ -26,10 +26,20 @@ const initialState: CustomerState = {
 
 export const queryCustomers = createAsyncThunk(
   'customerSlice/queryCustomers',
-  async () => {
-    const [result]: [ResultSet] = await global.db.executeSql(
-      'SELECT * FROM customers ORDER BY id desc',
-    );
+  async (args?: {searchQuery?: string; status?: string}) => {
+    const query = `
+      SELECT * FROM customers 
+      WHERE 
+        name LIKE ? OR 
+        phoneNumber LIKE ? AND 
+        status LIKE ? 
+      ORDER BY id DESC
+    `;
+    const [result]: [ResultSet] = await global.db.executeSql(query, [
+      `%${args?.searchQuery || ''}%`,
+      `%${args?.searchQuery || ''}%`,
+      `%${args?.status || ''}%`,
+    ]);
     return result?.rows?.raw?.();
   },
 );
