@@ -24,8 +24,7 @@ const SearchBar = (props: Props) => {
         CommonStyles.normalRadius,
         CommonStyles.normalBorderWidth,
         {
-          borderColor: colors.primary,
-          // backgroundColor: colors.card,
+          backgroundColor: colors.background,
           height: Heights.commonInput,
         },
         style,
