@@ -81,7 +81,7 @@ const NetworkFlatList = (props: Props): React.JSX.Element => {
       ListFooterComponent={
         <>
           {/* When user reached the end of the list, need to show loading indicator if we are getting more elements by fetching next page */}
-          {isPageLoading && <ActivityIndicator size={'large'} />}
+          {isPageLoading && !refreshing && <ActivityIndicator size={'large'} />}
           {/* If we have more items to fille whole phone screen, Fab icon will be on top of some list items, Adding bottom space will let us scroll it and see whole item  */}
           <View style={[CommonStyles.scrollViewBottomSpace]}></View>
         </>

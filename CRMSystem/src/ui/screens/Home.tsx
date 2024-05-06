@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {debounce} from 'lodash';
-import {Fragment, useCallback, useEffect} from 'react';
+import {Fragment, useCallback, useEffect, useRef} from 'react';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {CommonDelays} from '../../constants/numbers';
@@ -23,20 +23,31 @@ import {MainStackParamList} from '../navigations/MainStack';
 function Home(): React.JSX.Element {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
-  const {customers, loading}: CustomerState = useSelector(
+  const {customers, loading, page, isLastPage}: CustomerState = useSelector(
     (state: RootState) => state.customer,
   );
   const dispatch = useDispatch<AppDispatch>();
-  const getCustomers = useCallback(() => {
-    dispatch(queryCustomers());
+  const getCustomers = useCallback((query?: string, page?: number) => {
+    dispatch(queryCustomers({searchQuery: query, page}));
   }, []);
   useEffect(() => {
     getCustomers();
   }, []);
 
+  const queryRef = useRef('');
+
   const searchCustomer = debounce(query => {
-    dispatch(queryCustomers({searchQuery: query}));
+    queryRef.current = query;
+    getCustomers(query, 0);
   }, CommonDelays.debounce);
+
+  const onEndReached = () => {
+    if (!isLastPage) {
+      getCustomers(queryRef.current, page + 1);
+    }
+  };
+
+  console.log({isLastPage});
 
   return (
     <Fragment>
@@ -50,7 +61,7 @@ function Home(): React.JSX.Element {
             />
             <Text
               style={[TypographyStyles.title1, CommonStyles.bigMarginBottom]}>
-              Registered customers
+              {`Registered customers (${customers.length})`}
             </Text>
           </View>
         }
@@ -61,6 +72,7 @@ function Home(): React.JSX.Element {
           return <CustomerCard customer={item} />;
         }}
         emptyMessage="No customers registered."
+        onEndReached={onEndReached}
       />
       <FAB onPress={() => navigation.navigate('AddOrEditCustomer')} />
     </Fragment>

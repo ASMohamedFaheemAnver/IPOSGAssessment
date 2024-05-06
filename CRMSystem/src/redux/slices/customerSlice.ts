@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {union, uniqBy} from 'lodash';
 import {ResultSet} from 'react-native-sqlite-storage';
 
 export type CustomerStatus = 'active' | 'inactive' | 'lead';
@@ -18,27 +19,39 @@ export type CustomerState = {
   error: string | undefined | null;
   deleting?: number;
   updating?: number;
+  page: number;
+  size: number;
+  isLastPage: boolean;
 };
 
 const initialState: CustomerState = {
   loading: false,
   customers: [],
   error: null,
+  page: 0,
+  size: 10,
+  isLastPage: false,
 };
 
 export const queryCustomers = createAsyncThunk(
   'customerSlice/queryCustomers',
-  async (args?: {searchQuery?: string}) => {
+  async (args?: {searchQuery?: string; page?: number; size?: number}) => {
+    const fSize = args?.size || 10;
+    const fPage = args?.page || 0;
+    const offset = fPage * fSize;
     const query = `
       SELECT * FROM customers 
       WHERE 
         name LIKE ? OR 
         phoneNumber LIKE ?
       ORDER BY id DESC
+      LIMIT ? OFFSET ?
     `;
     const [result]: [ResultSet] = await global.db.executeSql(query, [
       `%${args?.searchQuery || ''}%`,
       `%${args?.searchQuery || ''}%`,
+      fSize,
+      offset,
     ]);
     return result?.rows?.raw?.();
   },
@@ -99,7 +112,20 @@ const customerSlice = createSlice({
       })
       .addCase(queryCustomers.fulfilled, (state, action) => {
         state.loading = false;
-        state.customers = action.payload;
+        if (action.meta.arg?.page) {
+          state.customers = uniqBy(
+            union(state.customers, action.payload),
+            'id',
+          );
+        } else {
+          state.customers = action.payload;
+        }
+        state.page = action.meta.arg?.page || 0;
+        if (!action.payload.length) {
+          state.isLastPage = true;
+        } else {
+          state.isLastPage = false;
+        }
       })
       .addCase(queryCustomers.rejected, (state, action) => {
         state.loading = false;
