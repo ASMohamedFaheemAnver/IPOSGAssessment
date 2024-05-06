@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import {Badge, useTheme} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {Gaps} from '../../../constants/numbers';
-import {IconTypes} from '../../../constants/strings';
+import {CUSTOMER_STATUS_OPTIONS, IconTypes} from '../../../constants/strings';
 import {Customer, deleteCustomer} from '../../../redux/slices/customerSlice';
 import {AppDispatch, RootState} from '../../../redux/store';
 import {CommonStyles} from '../../../styles';
@@ -64,7 +64,7 @@ const CustomerCard = (props: Props) => {
                 fontWeight: FontWeights.medium,
               },
             ]}>
-            {customer.status}
+            {CUSTOMER_STATUS_OPTIONS?.[customer.status]?.label}
           </Badge>
         </View>
         {/* Right */}

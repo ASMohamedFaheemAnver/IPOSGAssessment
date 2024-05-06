@@ -1,11 +1,13 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {ResultSet} from 'react-native-sqlite-storage';
 
+export type CustomerStatus = 'active' | 'inactive' | 'lead';
+
 export type Customer = {
   id: number;
   name: string;
   phoneNumber: string;
-  status: string;
+  status: CustomerStatus;
 };
 
 export type CustomerDto = Omit<Customer, 'id'>;

@@ -9,6 +9,7 @@ import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import * as yup from 'yup';
 import {PHONE_REG_EXP} from '../../constants/reg-exp';
+import {CUSTOMER_STATUS_OPTIONS} from '../../constants/strings';
 import {
   CustomerState,
   createCustomer,
@@ -31,7 +32,7 @@ const formSchema = yup.object({
     .string()
     .matches(PHONE_REG_EXP, 'Phone number must be valid')
     .required(),
-  status: yup.string().required(),
+  status: yup.string().oneOf(['active', 'inactive', 'lead']).required(),
 });
 type CustomerFormValues = yup.InferType<typeof formSchema>;
 
@@ -45,12 +46,6 @@ const AddOrEditCustomer = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
-
-  const STATUS_OPTIONS = [
-    {value: 'active', label: 'Active'},
-    {value: 'inactive', label: 'Inactive'},
-    {value: 'lead', label: 'Lead'},
-  ];
 
   const methods = useForm<CustomerFormValues>({
     resolver: yupResolver(formSchema),
@@ -118,7 +113,7 @@ const AddOrEditCustomer = (props: Props) => {
       <YupGroupRadioButton
         label={'Select customer status'}
         containerStyle={[CommonStyles.bigMarginBottom]}
-        options={STATUS_OPTIONS}
+        options={Object.values(CUSTOMER_STATUS_OPTIONS)}
         control={control}
         name="status"
         errors={errors}

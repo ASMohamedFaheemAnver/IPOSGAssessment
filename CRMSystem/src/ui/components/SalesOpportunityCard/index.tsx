@@ -5,7 +5,10 @@ import {View} from 'react-native';
 import {Badge} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {Gaps} from '../../../constants/numbers';
-import {IconTypes} from '../../../constants/strings';
+import {
+  IconTypes,
+  OPPORTUNITY_STATUS_OPTIONS,
+} from '../../../constants/strings';
 import {
   SalesOpportunity,
   deleteSalesOpportunity,
@@ -61,7 +64,7 @@ const SalesOpportunityCard = (props: Props) => {
                 fontWeight: FontWeights.medium,
               },
             ]}>
-            {salesOpportunity.status}
+            {OPPORTUNITY_STATUS_OPTIONS?.[salesOpportunity.status]?.label}
           </Badge>
         </View>
         {/* Right */}

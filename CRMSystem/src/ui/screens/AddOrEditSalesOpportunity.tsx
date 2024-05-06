@@ -8,6 +8,7 @@ import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import * as yup from 'yup';
+import {OPPORTUNITY_STATUS_OPTIONS} from '../../constants/strings';
 import {CustomerState} from '../../redux/slices/customerSlice';
 import {
   createSalesOpportunity,
@@ -26,7 +27,7 @@ import {MainStackParamList} from '../navigations/MainStack';
 // If we need to add extra functions/hooks eg. translation, move it inside component
 const formSchema = yup.object({
   name: yup.string().min(1).required(),
-  status: yup.string().required(),
+  status: yup.string().oneOf(['new', 'closedLost', 'closedWon']).required(),
 });
 type CustomerFormValues = yup.InferType<typeof formSchema>;
 
@@ -43,12 +44,6 @@ const AddOrEditSalesOpportunity = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
-
-  const STATUS_OPTIONS = [
-    {value: 'new', label: 'New'},
-    {value: 'closedWon', label: 'Closed Won'},
-    {value: 'closedLost', label: 'Closed Lost'},
-  ];
 
   const methods = useForm<CustomerFormValues>({
     resolver: yupResolver(formSchema),
@@ -108,7 +103,7 @@ const AddOrEditSalesOpportunity = (props: Props) => {
       <YupGroupRadioButton
         label={'Select opportunity status'}
         containerStyle={[CommonStyles.bigMarginBottom]}
-        options={STATUS_OPTIONS}
+        options={Object.values(OPPORTUNITY_STATUS_OPTIONS)}
         control={control}
         name="status"
         errors={errors}

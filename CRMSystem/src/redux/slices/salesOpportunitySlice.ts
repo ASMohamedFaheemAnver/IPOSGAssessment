@@ -1,10 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {ResultSet} from 'react-native-sqlite-storage';
 
+export type SalesOpportunityStatus = 'new' | 'closedWon' | 'closedLost';
+
 export type SalesOpportunity = {
   id: number;
   name: string;
-  status: string;
+  status: SalesOpportunityStatus;
   customerId: number;
 };
 

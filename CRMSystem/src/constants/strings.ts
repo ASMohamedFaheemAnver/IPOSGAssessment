@@ -30,3 +30,15 @@ export const IconTypes = {
   FontAwesome: 'FontAwesome',
   FontAwesome5: 'FontAwesome5',
 };
+
+export const CUSTOMER_STATUS_OPTIONS = {
+  active: {value: 'active', label: 'Active'},
+  inactive: {value: 'inactive', label: 'Inactive'},
+  lead: {value: 'lead', label: 'Lead'},
+};
+
+export const OPPORTUNITY_STATUS_OPTIONS = {
+  new: {value: 'new', label: 'New'},
+  closedWon: {value: 'closedWon', label: 'Closed Won'},
+  closedLost: {value: 'closedLost', label: 'Closed Lost'},
+};
