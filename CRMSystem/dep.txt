@@ -40,3 +40,8 @@ npm i --save-dev @types/lodash
 # To organize imports
 -> https://github.com/simonhaenisch/prettier-plugin-organize-imports
 npm install --save-dev prettier-plugin-organize-imports
+
+# More testing
+-> https://github.com/callstack/react-native-testing-library
+npm install --save-dev @testing-library/react-native
+-> https://callstack.github.io/react-native-testing-library/docs/jest-matchers#setup

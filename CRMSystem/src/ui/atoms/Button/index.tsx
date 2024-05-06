@@ -12,6 +12,7 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   disabledStyle?: StyleProp<ViewStyle>;
   children: React.JSX.Element | React.JSX.Element[];
+  testID?: string;
 };
 
 export default function Button(props: Props) {
