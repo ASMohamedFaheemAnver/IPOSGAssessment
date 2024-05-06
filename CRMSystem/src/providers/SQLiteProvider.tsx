@@ -71,6 +71,8 @@ const SQLiteProvider = (props: Props) => {
       );
       SQLite.enablePromise(true);
       SQLite.DEBUG(__DEV__);
+    } else {
+      onTrue();
     }
   }, []);
 
