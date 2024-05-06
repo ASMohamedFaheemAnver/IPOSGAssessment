@@ -72,7 +72,9 @@ const SalesOpportunities = (props: Props) => {
             />
             <Text
               style={[TypographyStyles.title1, CommonStyles.bigMarginBottom]}>
-              {`${customer.name}'s sales opportunities (${salesOpportunities.length})`}
+              {`${customer.name}'s sales opportunities(${
+                salesOpportunities.length
+              }${isLastPage ? '' : '+'})`}
             </Text>
           </View>
         }

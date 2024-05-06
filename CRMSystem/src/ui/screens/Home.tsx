@@ -59,7 +59,9 @@ function Home(): React.JSX.Element {
             />
             <Text
               style={[TypographyStyles.title1, CommonStyles.bigMarginBottom]}>
-              {`Registered customers (${customers.length})`}
+              {`Registered customers(${customers.length}${
+                isLastPage ? '' : '+'
+              })`}
             </Text>
           </View>
         }
