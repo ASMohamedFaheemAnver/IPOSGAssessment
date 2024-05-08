@@ -1,10 +1,10 @@
+import {CommonColors} from '@themes/colors/commonColors';
 import {
   GestureResponderEvent,
   StyleProp,
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import {CommonColors} from '../../../themes/colors/commonColors';
 
 type Props = {
   onPress?: (event: GestureResponderEvent) => void;

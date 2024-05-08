@@ -1,3 +1,8 @@
+import {IconSizes, Paddings} from '@constants/numbers';
+import {TypographyStyles} from '@src/typography';
+import Button from '@ui/atoms/Button';
+import Icon from '@ui/atoms/Icon';
+import Text from '@ui/atoms/Text';
 import {
   GestureResponderEvent,
   StyleProp,
@@ -5,11 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
-import {IconSizes, Paddings} from '../../../constants/numbers';
-import {TypographyStyles} from '../../../typography';
-import Button from '../../atoms/Button';
-import Icon from '../../atoms/Icon';
-import Text from '../../atoms/Text';
 
 type Props = {
   onPress?: (event: GestureResponderEvent) => void;

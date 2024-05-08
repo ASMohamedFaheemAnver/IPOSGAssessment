@@ -1,6 +1,6 @@
+import {Paddings} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
 import {ScrollView as RNScrollView, View} from 'react-native';
-import {Paddings} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
 
 type Props = {
   children: React.JSX.Element[];

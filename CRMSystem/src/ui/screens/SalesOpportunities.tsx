@@ -1,26 +1,26 @@
+import {CommonDelays} from '@constants/numbers';
 import {useNavigation} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {debounce} from 'lodash';
-import React, {Fragment, useCallback, useEffect, useRef} from 'react';
-import {View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {CommonDelays} from '../../constants/numbers';
 import {
   SalesOpportunity,
   SalesOpportunityState,
   querySalesOpportunities,
-} from '../../redux/slices/salesOpportunitySlice';
-import {AppDispatch, RootState} from '../../redux/store';
+} from '@redux/slices/salesOpportunitySlice';
+import {AppDispatch, RootState} from '@redux/store';
+import NetworkFlatList from '@ui/components/NetworkFlatList';
+import SalesOpportunityCard from '@ui/components/SalesOpportunityCard';
+import SearchBar from '@ui/components/SearchBar';
+import {debounce} from 'lodash';
+import React, {Fragment, useCallback, useEffect, useRef} from 'react';
+import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {CommonStyles} from '../../styles';
 import {TypographyStyles} from '../../typography';
 import FAB from '../atoms/FAB';
 import Text from '../atoms/Text';
-import NetworkFlatList from '../components/NetworkFlatList';
-import SalesOpportunityCard from '../components/SalesOpportunityCard';
-import SearchBar from '../components/SearchBar';
 import {MainStackParamList} from '../navigations/MainStack';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'SalesOpportunities'>;

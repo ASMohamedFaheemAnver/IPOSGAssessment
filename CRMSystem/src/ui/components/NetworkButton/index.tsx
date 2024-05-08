@@ -1,3 +1,6 @@
+import {IconSizes} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {CommonColors} from '@themes/colors/commonColors';
 import {
   GestureResponderEvent,
   StyleProp,
@@ -6,9 +9,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
-import {IconSizes} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
 import styles from './styles';
 
 type Props = {

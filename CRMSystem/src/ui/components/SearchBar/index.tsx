@@ -1,10 +1,10 @@
+import {Heights} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {TypographyStyles} from '@src/typography';
+import {CommonColors} from '@themes/colors/commonColors';
 import {useState} from 'react';
 import {Animated, StyleProp, ViewStyle} from 'react-native';
 import {Searchbar as RNPSearchBar, useTheme} from 'react-native-paper';
-import {Heights} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import {TypographyStyles} from '../../../typography';
 
 type Props = {
   placeholder?: string;

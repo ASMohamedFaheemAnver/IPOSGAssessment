@@ -1,8 +1,8 @@
+import {zIndices} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {CommonColors} from '@themes/colors/commonColors';
 import {GestureResponderEvent} from 'react-native';
 import {FAB as RNPFAB} from 'react-native-paper';
-import {zIndices} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
 
 type Props = {
   onPress: (e: GestureResponderEvent) => void;

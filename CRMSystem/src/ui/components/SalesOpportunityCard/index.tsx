@@ -1,24 +1,21 @@
+import {Gaps} from '@constants/numbers';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  SalesOpportunity,
+  deleteSalesOpportunity,
+} from '@redux/slices/salesOpportunitySlice';
+import {AppDispatch, RootState} from '@redux/store';
+import {IconTypes, OPPORTUNITY_STATUS_OPTIONS} from '@src/constants/strings';
+import {CommonStyles} from '@src/styles';
+import {FontWeights, TypographyStyles} from '@src/typography';
+import {CommonColors} from '@themes/colors/commonColors';
+import Text from '@ui/atoms/Text';
+import {MainStackParamList} from '@ui/navigations/MainStack';
 import React from 'react';
 import {View} from 'react-native';
 import {Badge} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {Gaps} from '../../../constants/numbers';
-import {
-  IconTypes,
-  OPPORTUNITY_STATUS_OPTIONS,
-} from '../../../constants/strings';
-import {
-  SalesOpportunity,
-  deleteSalesOpportunity,
-} from '../../../redux/slices/salesOpportunitySlice';
-import {AppDispatch, RootState} from '../../../redux/store';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import {FontWeights, TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
-import {MainStackParamList} from '../../navigations/MainStack';
 import IconButton from '../IconButton';
 import NetworkIconButton from '../NetworkIconButton';
 

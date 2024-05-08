@@ -1,12 +1,12 @@
+import {IconSizes} from '@constants/numbers';
+import Button from '@ui/atoms/Button';
+import Icon from '@ui/atoms/Icon';
 import {
   GestureResponderEvent,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import {IconSizes} from '../../../constants/numbers';
-import Button from '../../atoms/Button';
-import Icon from '../../atoms/Icon';
 import styles from './styles';
 
 type Props = {

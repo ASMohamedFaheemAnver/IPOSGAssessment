@@ -1,23 +1,23 @@
+import {CommonDelays} from '@constants/numbers';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {debounce} from 'lodash';
-import {Fragment, useCallback, useEffect, useRef} from 'react';
-import {View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {CommonDelays} from '../../constants/numbers';
 import {
   Customer,
   CustomerState,
   queryCustomers,
-} from '../../redux/slices/customerSlice';
-import {AppDispatch, RootState} from '../../redux/store';
+} from '@redux/slices/customerSlice';
+import {AppDispatch, RootState} from '@redux/store';
+import CustomerCard from '@ui/components/CustomerCard';
+import NetworkFlatList from '@ui/components/NetworkFlatList';
+import SearchBar from '@ui/components/SearchBar';
+import {debounce} from 'lodash';
+import {Fragment, useCallback, useEffect, useRef} from 'react';
+import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {CommonStyles} from '../../styles';
 import {TypographyStyles} from '../../typography';
 import FAB from '../atoms/FAB';
 import Text from '../atoms/Text';
-import CustomerCard from '../components/CustomerCard';
-import NetworkFlatList from '../components/NetworkFlatList';
-import SearchBar from '../components/SearchBar';
 import {MainStackParamList} from '../navigations/MainStack';
 
 function Home(): React.JSX.Element {

@@ -1,8 +1,8 @@
+import {Paddings} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {FontWeights, TypographyStyles} from '@src/typography';
+import Text from '@ui/atoms/Text';
 import {ActivityIndicator, View} from 'react-native';
-import {Paddings} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {FontWeights, TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
 
 type Props = {
   label: string;

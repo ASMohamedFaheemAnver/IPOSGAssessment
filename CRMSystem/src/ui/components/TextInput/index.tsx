@@ -1,3 +1,8 @@
+import {IconSizes} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {TypographyStyles} from '@src/typography';
+import {CommonColors} from '@themes/colors/commonColors';
+import Text from '@ui/atoms/Text';
 import {capitalize} from 'lodash';
 import {LegacyRef, useState} from 'react';
 import {
@@ -12,11 +17,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {IconSizes} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import {TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
 import IconButton from '../IconButton';
 import styles from './styles';
 

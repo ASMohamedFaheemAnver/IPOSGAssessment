@@ -1,6 +1,6 @@
+import {Opacities} from '@constants/numbers';
+import {CommonColors} from '@themes/colors/commonColors';
 import Svg, {Path} from 'react-native-svg';
-import {Opacities} from '../../constants/numbers';
-import {CommonColors} from '../../themes/colors/commonColors';
 
 const EmptySvg = props => {
   const {pathFill} = props;

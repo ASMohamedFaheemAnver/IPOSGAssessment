@@ -1,3 +1,8 @@
+import {EmptySvg} from '@assets/svgs';
+import {Opacities, Widths} from '@constants/numbers';
+import {CommonStyles} from '@src/styles';
+import {TypographyStyles} from '@src/typography';
+import Text from '@ui/atoms/Text';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -7,11 +12,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {EmptySvg} from '../../../assets/svgs';
-import {Opacities, Widths} from '../../../constants/numbers';
-import {CommonStyles} from '../../../styles';
-import {TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
 import SubLoading from '../SubLoading';
 
 type Props = {

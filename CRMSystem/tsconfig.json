@@ -15,6 +15,24 @@
       "@ui/*": [
         "./src/ui/*"
       ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
+      "@themes/*": [
+        "./src/themes/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@typography/*": [
+        "./src/typography/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
     },
   }
 }

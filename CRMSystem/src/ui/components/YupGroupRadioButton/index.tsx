@@ -1,12 +1,12 @@
+import {CommonStyles} from '@src/styles';
+import {TypographyStyles} from '@src/typography';
+import {CommonColors} from '@themes/colors/commonColors';
+import Text from '@ui/atoms/Text';
 import {capitalize} from 'lodash';
 import React from 'react';
 import {Control, Controller, FieldErrors} from 'react-hook-form';
 import {StyleProp, View, ViewStyle} from 'react-native';
 import {RadioButton} from 'react-native-paper';
-import {CommonStyles} from '../../../styles';
-import {CommonColors} from '../../../themes/colors/commonColors';
-import {TypographyStyles} from '../../../typography';
-import Text from '../../atoms/Text';
 
 type Props = {
   control: Control<any>;
